@@ -1,0 +1,24 @@
+{
+  "name": "insinoorilaskurit",
+  "version": "1.0.0",
+  "description": "Interaktiivisia ja salamannepeita hyötylaskureita insinööreille, ammattilaisille ja DIY-harrastajille (mm. kaapelimitoitus). Toteutettu kevyenä client-side-sovelluksena ilman palvelinkustannuksia.",
+  "main": "index.js",
+  "scripts": {
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "coverage": "vitest run --coverage"
+  },
+  "repository": {
+    "type": "git",
+    "url": "http://localhost:26831/Ropzuman/insinoorilaskurit"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@vitest/coverage-v8": "^5.0.3",
+    "typescript": "^7.0.2",
+    "vitest": "^5.0.3"
+  },
+  "type": "module"
+}
