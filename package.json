@@ -1,24 +1,37 @@
 {
-  "name": "insinoorilaskurit",
-  "version": "1.0.0",
-  "description": "Interaktiivisia ja salamannepeita hyötylaskureita insinööreille, ammattilaisille ja DIY-harrastajille (mm. kaapelimitoitus). Toteutettu kevyenä client-side-sovelluksena ilman palvelinkustannuksia.",
-  "main": "index.js",
-  "scripts": {
-    "test": "vitest run",
-    "test:watch": "vitest",
-    "coverage": "vitest run --coverage"
-  },
-  "repository": {
-    "type": "git",
-    "url": "http://localhost:26831/Ropzuman/insinoorilaskurit"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "devDependencies": {
-    "@vitest/coverage-v8": "^5.0.3",
-    "typescript": "^7.0.2",
-    "vitest": "^5.0.3"
-  },
-  "type": "module"
+	"name": "insinoorilaskurit",
+	"version": "1.0.0",
+	"description": "Interaktiivisia ja salamannepeita hyötylaskureita insinööreille, ammattilaisille ja DIY-harrastajille (mm. kaapelimitoitus). Toteutettu kevyenä client-side-sovelluksena ilman palvelinkustannuksia.",
+	"type": "module",
+	"scripts": {
+		"dev": "astro dev",
+		"start": "astro dev",
+		"build": "astro build",
+		"preview": "astro preview",
+		"astro": "astro",
+		"test": "vitest run",
+		"test:watch": "vitest",
+		"coverage": "vitest run --coverage"
+	},
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/Ropzuman/insinoorilaskurit"
+	},
+	"license": "ISC",
+	"dependencies": {
+		"@astrojs/react": "^4.2.0",
+		"@astrojs/tailwind": "^6.0.0",
+		"astro": "^5.4.0",
+		"autoprefixer": "^10.4.20",
+		"react": "^19.0.0",
+		"react-dom": "^19.0.0",
+		"tailwindcss": "^3.4.17"
+	},
+	"devDependencies": {
+		"@types/react": "^19.0.0",
+		"@types/react-dom": "^19.0.0",
+		"@vitest/coverage-v8": "^3.0.0",
+		"typescript": "^5.7.0",
+		"vitest": "^3.0.0"
+	}
 }
