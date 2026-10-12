@@ -165,11 +165,26 @@ const {
 
 		<!-- Teeman kytkentä-skripti -->
 		<script>
-			const toggleBtn = document.getElementById("theme-toggle");
-			toggleBtn?.addEventListener("click", () => {
-				const isDark = document.documentElement.classList.toggle("dark");
-				localStorage.setItem("theme", isDark ? "dark" : "light");
-			});
+			const initThemeToggle = () => {
+				const toggleBtn = document.getElementById("theme-toggle");
+				if (!toggleBtn) return;
+
+				// Poistetaan vanha kuuntelija mahdollisten uudelleenreititysten varalta
+				toggleBtn.replaceWith(toggleBtn.cloneNode(true));
+				const newToggleBtn = document.getElementById("theme-toggle");
+
+				newToggleBtn?.addEventListener("click", () => {
+					const isDark = document.documentElement.classList.toggle("dark");
+					localStorage.setItem("theme", isDark ? "dark" : "light");
+				});
+			};
+
+			// Suoritetaan heti kun DOM on valmis
+			if (document.readyState === "loading") {
+				document.addEventListener("DOMContentLoaded", initThemeToggle);
+			} else {
+				initThemeToggle();
+			}
 		</script>
 	</body>
 </html>
