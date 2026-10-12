@@ -1,10 +1,7 @@
 {
-	// Käynnistä kehityspalvelin
-	"scripts": {
-		"dev": "npm run dev"
-	},
 	"editor.formatOnSave": true,
 	"editor.defaultFormatter": "esbenp.prettier-vscode",
+	"files.eol": "\n",
 	"[astro]": {
 		"editor.defaultFormatter": "astro-build.astro-vscode"
 	}

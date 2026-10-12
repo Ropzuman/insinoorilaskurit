@@ -1,0 +1,4 @@
+@import "tailwindcss";
+
+/* Mahdollistetaan manuaalinen luokkapohjainen tumma teema (.dark) Tailwind v4:ssä */
+@custom-variant dark (&:where(.dark, .dark *));

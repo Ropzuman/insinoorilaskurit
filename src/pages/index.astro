@@ -1,0 +1,67 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+---
+
+<BaseLayout title="Insinöörilaskurit.fi ⚡ – Tekniset laskurit ammattilaisille">
+	<section class="text-center space-y-4 mb-12">
+		<h1
+			class="text-3xl sm:text-5xl font-extrabold tracking-tight text-slate-900 dark:text-white"
+		>
+			Tekniset laskurit käden ulottuvilla
+		</h1>
+		<p class="text-slate-600 dark:text-slate-400 text-lg max-w-2xl mx-auto">
+			Salamannopeat, tarkat ja täysin ilmaiset hyötylaskurit insinööreille,
+			sähköasentajille ja harrastajille.
+		</p>
+	</section>
+
+	<!-- Laskurikortit -->
+	<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+		<a
+			href="/sahko/kaapelimitoitus"
+			class="group p-6 bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 hover:border-blue-500 dark:hover:border-blue-400 transition shadow-sm hover:shadow-md"
+		>
+			<div class="text-3xl mb-3">⚡</div>
+			<h2
+				class="text-xl font-bold text-slate-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition"
+			>
+				Kaapelimitoitus
+			</h2>
+			<p class="text-sm text-slate-600 dark:text-slate-400 mt-2">
+				Mitoita kaapelin poikkipinta-ala, jännitteenalenema ja tehohäviö AC- ja
+				DC-järjestelmille.
+			</p>
+		</a>
+
+		<a
+			href="/mekaniikka/3d-tulostus"
+			class="group p-6 bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 hover:border-emerald-500 dark:hover:border-emerald-400 transition shadow-sm hover:shadow-md"
+		>
+			<div class="text-3xl mb-3">🛠️</div>
+			<h2
+				class="text-xl font-bold text-slate-900 dark:text-white group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition"
+			>
+				3D-tulostuksen kustannus
+			</h2>
+			<p class="text-sm text-slate-600 dark:text-slate-400 mt-2">
+				Laske kappaleen materiaalikustannukset ja tulostuksen sähkönkulutus suoraan
+				g-määrällä ja ajalla.
+			</p>
+		</a>
+
+		<a
+			href="/lvi/painehavio"
+			class="group p-6 bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 hover:border-purple-500 dark:hover:border-purple-400 transition shadow-sm hover:shadow-md"
+		>
+			<div class="text-3xl mb-3">💧</div>
+			<h2
+				class="text-xl font-bold text-slate-900 dark:text-white group-hover:text-purple-600 dark:group-hover:text-purple-400 transition"
+			>
+				Putkiston painehäviö
+			</h2>
+			<p class="text-sm text-slate-600 dark:text-slate-400 mt-2">
+				Määritä nesteen tai kaasun virtausnopeus ja painehäviö eri putkihalkaisijoille.
+			</p>
+		</a>
+	</div>
+</BaseLayout>

@@ -1,0 +1,124 @@
+---
+import CableCalculator from "../../components/calculators/CableCalculator";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+
+const title =
+	"Kaapelimitoitus & Jännitteenalenemalaskuri (AC & DC) | Insinöörilaskurit.fi";
+const description =
+	"Mitoita sähkökaapelin poikkipinta-ala (mm²), jännitteenalenema (V ja %) sekä tehohäviö 12V, 24V, 230V ja 400V asennuksille. Ilmainen insinöörilaskuri.";
+
+// JSON-LD Strukturoitu data SEO-optimointia varten
+const jsonLd = {
+	"@context": "https://schema.org",
+	"@graph": [
+		{
+			"@type": "SoftwareApplication",
+			name: "Kaapelimitoituslaskuri",
+			operatingSystem: "All",
+			applicationCategory: "UtilitiesApplication",
+			offers: {
+				"@type": "Offer",
+				price: "0",
+				priceCurrency: "EUR",
+			},
+			description: description,
+		},
+		{
+			"@type": "FAQPage",
+			mainEntity: [
+				{
+					"@type": "Question",
+					name: "Paljonko saa olla kaapelin jännitehäviö?",
+					acceptedAnswer: {
+						"@type": "Answer",
+						text: "Yleisissä sähköasennuksissa suositeltu enimmäisjännitehäviö on 3 %. Pääsyöttöjohdoilla ja pidemmillä siirroilla sallitaan usein enintään 5 % häviö.",
+					},
+				},
+				{
+					"@type": "Question",
+					name: "Miten 12V DC ja 230V AC kaapelimitoitus eroaa?",
+					acceptedAnswer: {
+						"@type": "Answer",
+						text: "Matalajännitteellä (12V DC) virrat (A) ovat samoilla tehoilla huomattavasti suurempia kuin 230V verkkojännitteellä, jolloin jännitehäviön suhteellinen osuus kasvaa nopeasti. 12V järjestelmissä tarvitaan siten usein huomattavasti paksumpaa kaapelia.",
+					},
+				},
+			],
+		},
+	],
+};
+---
+
+<BaseLayout title={title} description={description}>
+	<!-- Leivänmurut / Breadcrumb -->
+	<nav
+		class="flex items-center gap-2 text-xs font-medium text-slate-500 dark:text-slate-400 mb-6"
+	>
+		<a href="/" class="hover:text-blue-600 dark:hover:text-blue-400 transition">Etusivu</a
+		>
+		<span>/</span>
+		<span class="text-slate-700 dark:text-slate-300">Sähkö</span>
+		<span>/</span>
+		<span class="text-blue-600 dark:text-blue-400 font-bold">Kaapelimitoitus</span>
+	</nav>
+
+	<!-- Sivun otsikko & Kuvaus -->
+	<header class="mb-10 space-y-3">
+		<div
+			class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/10 text-blue-600 dark:text-blue-400 border border-blue-500/20 text-xs font-bold"
+		>
+			⚡ Sähkö & Automaatio
+		</div>
+		<h1
+			class="text-3xl sm:text-4xl font-extrabold tracking-tight text-slate-900 dark:text-white"
+		>
+			Kaapelimitoitus & Jännitteenalenemalaskuri
+		</h1>
+		<p class="text-slate-600 dark:text-slate-400 text-base sm:text-lg max-w-3xl">
+			Laske optimaalinen kaapelin poikkipinta-ala ($mm^2$), jännitehäviö sekä tehohäviö
+			tasajännite- (12V/24V/48V) ja verkkojänniteasennuksille (230V/400V).
+		</p>
+	</header>
+
+	<!-- Interaktiivinen React-laskuri (Hydratoidaan selaimessa) -->
+	<section class="mb-16">
+		<CableCalculator client:load />
+	</section>
+
+	<!-- Hakukoneoptimoidut UKK / Tietoiskut (FAQ) -->
+	<section class="border-t border-slate-200 dark:border-slate-800 pt-12 space-y-8">
+		<h2 class="text-2xl font-bold text-slate-900 dark:text-white">
+			Usein kysyttyä kaapelimitoituksesta
+		</h2>
+
+		<div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-sm">
+			<div
+				class="bg-white dark:bg-slate-800/60 p-6 rounded-2xl border border-slate-200 dark:border-slate-700/60 space-y-2"
+			>
+				<h3 class="font-bold text-base text-slate-900 dark:text-white">
+					Miksi jännitehäviö pitää laskea?
+				</h3>
+				<p class="text-slate-600 dark:text-slate-400 leading-relaxed">
+					Liian ohut kaapeli tai liian pitkä etäisyys aiheuttaa jännitehäviötä, joka voi
+					johtaa laitteiden virhetoimintaan, ylikuumenemiseen tai pahimmillaan
+					palovaaraan.
+				</p>
+			</div>
+
+			<div
+				class="bg-white dark:bg-slate-800/60 p-6 rounded-2xl border border-slate-200 dark:border-slate-700/60 space-y-2"
+			>
+				<h3 class="font-bold text-base text-slate-900 dark:text-white">
+					Kupari vai Alumiini?
+				</h3>
+				<p class="text-slate-600 dark:text-slate-400 leading-relaxed">
+					Kuparilla on parempi sähkönjohtavuus kuin alumiinilla. Alumiinikaapelia
+					käytetään usein suuremmissa runkokaapeleissa keveytensä ja edullisemman hinnan
+					vuoksi, mutta se vaatii paksumman poikkipinta-alan.
+				</p>
+			</div>
+		</div>
+	</section>
+
+	<!-- JSON-LD Strukturoitu data head-osioon -->
+	<script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+</BaseLayout>
