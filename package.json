@@ -1,7 +1,7 @@
 {
 	"name": "insinoorilaskurit",
 	"version": "1.0.0",
-	"description": "Interaktiivisia ja salamannepeita hyötylaskureita insinööreille, ammattilaisille ja DIY-harrastajille (mm. kaapelimitoitus). Toteutettu kevyenä client-side-sovelluksena ilman palvelinkustannuksia.",
+	"description": "Interaktiivisia ja salamannopeita hyötylaskureita insinööreille, ammattilaisille ja DIY-harrastajille (mm. kaapelimitoitus). Toteutettu kevyenä client-side-sovelluksena ilman palvelinkustannuksia.",
 	"type": "module",
 	"scripts": {
 		"dev": "astro dev",

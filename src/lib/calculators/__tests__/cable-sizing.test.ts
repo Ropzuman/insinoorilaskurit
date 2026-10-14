@@ -1,8 +1,8 @@
 import { describe, expect, it } from "vitest";
 import { calculateCableSizing } from "../cable-sizing";
 
-describe("Kaapelimitoituslaskuri (Cable Sizing)", () => {
-	it("laskee 12V DC -järjestelmän jännitehäviön ja poikkipinta-alan oikein", () => {
+describe("calculateCableSizing", () => {
+	it("calculates voltage drop and cross-sectional area for a 12 V DC system", () => {
 		const result = calculateCableSizing({
 			voltage: 12,
 			currentAmperes: 10,
@@ -10,13 +10,13 @@ describe("Kaapelimitoituslaskuri (Cable Sizing)", () => {
 			maxAllowedDropPercent: 3,
 		});
 
-		expect(result.recommendedMm2).toBe(6); // 6mm² kaapeli pitää häviön alle 3%
+		expect(result.recommendedMm2).toBe(6);
 		expect(result.voltageDropPercent).toBeLessThanOrEqual(3);
 		expect(result.status).toBe("ok");
 		expect(result.recommendedFuseAmperes).toBe(10);
 	});
 
-	it("käsittelee 3-vaiheisen 400V AC -asennuksen oikein", () => {
+	it("calculates cable sizing for a 400 V three-phase system", () => {
 		const result = calculateCableSizing({
 			voltage: 400,
 			currentAmperes: 25,
@@ -29,7 +29,7 @@ describe("Kaapelimitoituslaskuri (Cable Sizing)", () => {
 		expect(result.recommendedFuseAmperes).toBe(25);
 	});
 
-	it("palauttaa warning-statuksen kun jännitehäviö on 3-5% välillä", () => {
+	it("returns warning status when voltage drop is between 3% and 5%", () => {
 		const result = calculateCableSizing({
 			voltage: 12,
 			currentAmperes: 100,
@@ -42,11 +42,11 @@ describe("Kaapelimitoituslaskuri (Cable Sizing)", () => {
 		expect(result.status).toBe("warning");
 	});
 
-	it("palauttaa danger-statuksen kun jännitehäviö ylittää 5%", () => {
+	it("returns danger status when voltage drop exceeds 5%", () => {
 		const result = calculateCableSizing({
 			voltage: 12,
 			currentAmperes: 100,
-			lengthMeters: 100, // 100 metrillä 300mm² kaapelin häviö on ~9.89%
+			lengthMeters: 100,
 			maxAllowedDropPercent: 3,
 		});
 
