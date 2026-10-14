@@ -6,12 +6,19 @@ palvelinkustannuksia.
 
 ## Kehitys
 
-Käytä projektin `.nvmrc`-tiedostossa määriteltyä Node.js-versiota.
+Asenna Node.js 24 LTS ja npm macOS- tai Windows-ympäristöösi. Projektin
+`.nvmrc`-tiedosto ja GitHub Actions käyttävät samaa Node.js-pääversiota. Tarkista
+asennus komennoilla `node --version` ja `npm --version`, asenna lukitut riippuvuudet
+ja käynnistä kehityspalvelin:
 
 ```sh
 npm ci
 npm run dev
 ```
+
+`npm ci` asentaa täsmälleen `package-lock.json`-tiedoston riippuvuudet ja epäonnistuu,
+jos Node.js-versio ei täytä projektin vaatimusta. Riippuvuuksien päivityksen jälkeen
+päivitä lukitustiedosto komennolla `npm install` ja tarkista muutokset versionhallinnasta.
 
 | Komento | Kuvaus |
 | --- | --- |
