@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 
-import { calculateVoltageDrop, type CalculatorInput } from '../voltageDrop';
+import { calculateVoltageDrop, type CalculatorInput } from '../voltage-drop';
 
 describe('calculateVoltageDrop', () => {
   it('calculates safe single-phase voltage drop', () => {

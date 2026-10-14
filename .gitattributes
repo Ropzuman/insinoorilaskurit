@@ -1,4 +1,2 @@
 # Pakotetaan LF-rivinvaihdot kaikille tekstitiedostoille molemmilla alustoilla
 * text=auto eol=lf
-*.{js,ts,jsx,tsx,astro,json,md,css,html} text eol=lf
-*.{png,jpg,jpeg,gif,webp,ico,svg} binary
