@@ -3,10 +3,13 @@ export type ThreePhaseCalculationMode =
 	| "fromActivePower"
 	| "fromApparentPower";
 
+export type ActivePowerType = "electrical" | "shaft";
+
 export interface ThreePhasePowerInput {
 	voltage: number; // Line voltage U_L (V), e.g., 400
 	current?: number; // Current I (A)
-	activePowerKW?: number; // Active power P (kW)
+	activePowerKW?: number; // Electrical active or motor shaft power (kW)
+	activePowerType?: ActivePowerType; // Meaning of activePowerKW, defaults to motor shaft power
 	apparentPowerKVA?: number; // Apparent power S (kVA)
 	powerFactor?: number; // cos(phi), range (0, 1]
 	efficiency?: number; // eta (%), range (1, 100], default 100%
@@ -17,8 +20,10 @@ export interface ThreePhasePowerResult {
 	voltageLine: number; // Line voltage U_L (V)
 	voltagePhase: number; // Phase voltage U_P = U_L / sqrt(3) (V)
 	current: number; // Current I (A)
-	activePowerW: number; // Active power P (W)
-	activePowerKW: number; // Active power P (kW)
+	electricalActivePowerW: number; // Electrical input active power P_e (W)
+	electricalActivePowerKW: number; // Electrical input active power P_e (kW)
+	shaftOutputPowerW: number; // Motor shaft output power P_shaft (W)
+	shaftOutputPowerKW: number; // Motor shaft output power P_shaft (kW)
 	apparentPowerVA: number; // Apparent power S (VA)
 	apparentPowerKVA: number; // Apparent power S (kVA)
 	reactivePowerVar: number; // Reactive power Q (var)
@@ -31,10 +36,11 @@ export interface ThreePhasePowerResult {
 }
 
 /**
- * Calculates 3-phase AC power components (P, S, Q, I, cos phi).
- * Formula: P = sqrt(3) * U_L * I * cos(phi) * eta
+ * Calculates 3-phase AC power components (P_e, P_shaft, S, Q, I, cos phi).
+ * Formula: P_e = sqrt(3) * U_L * I * cos(phi)
+ * Formula: P_shaft = P_e * eta
  * Formula: S = sqrt(3) * U_L * I
- * Formula: Q = sqrt(S^2 - P_elec^2)
+ * Formula: Q = sqrt(S^2 - P_e^2)
  */
 export function calculateThreePhasePower(
 	input: ThreePhasePowerInput,
@@ -43,6 +49,7 @@ export function calculateThreePhasePower(
 		voltage,
 		current = 0,
 		activePowerKW = 0,
+		activePowerType = "shaft",
 		apparentPowerKVA = 0,
 		powerFactor = 0.85,
 		efficiency = 100,
@@ -51,7 +58,7 @@ export function calculateThreePhasePower(
 
 	// Validation
 	if (voltage <= 0) {
-		return createErrorResult("Pääjännitteen (U_L) täytyy olla suurempi kuin 0 V.");
+		return createErrorResult("Jännitteen (U) täytyy olla suurempi kuin 0 V.");
 	}
 
 	if (powerFactor <= 0 || powerFactor > 1) {
@@ -66,7 +73,8 @@ export function calculateThreePhasePower(
 	const sqrt3 = Math.sqrt(3);
 	let calcI = 0;
 	let calcS_VA = 0;
-	let calcP_W = 0;
+	let electricalActivePowerW = 0;
+	let shaftOutputPowerW = 0;
 
 	if (calculationMode === "fromCurrent") {
 		if (current <= 0) {
@@ -74,14 +82,20 @@ export function calculateThreePhasePower(
 		}
 		calcI = current;
 		calcS_VA = sqrt3 * voltage * calcI;
-		calcP_W = calcS_VA * powerFactor * eta;
+		electricalActivePowerW = calcS_VA * powerFactor;
+		shaftOutputPowerW = electricalActivePowerW * eta;
 	} else if (calculationMode === "fromActivePower") {
 		if (activePowerKW <= 0) {
 			return createErrorResult("Syötä voimassa oleva pätöteho (kW).");
 		}
-		calcP_W = activePowerKW * 1000;
-		const electricalPowerW = calcP_W / eta;
-		calcS_VA = electricalPowerW / powerFactor;
+		if (activePowerType === "electrical") {
+			electricalActivePowerW = activePowerKW * 1000;
+			shaftOutputPowerW = electricalActivePowerW * eta;
+		} else {
+			shaftOutputPowerW = activePowerKW * 1000;
+			electricalActivePowerW = shaftOutputPowerW / eta;
+		}
+		calcS_VA = electricalActivePowerW / powerFactor;
 		calcI = calcS_VA / (sqrt3 * voltage);
 	} else if (calculationMode === "fromApparentPower") {
 		if (apparentPowerKVA <= 0) {
@@ -89,12 +103,12 @@ export function calculateThreePhasePower(
 		}
 		calcS_VA = apparentPowerKVA * 1000;
 		calcI = calcS_VA / (sqrt3 * voltage);
-		calcP_W = calcS_VA * powerFactor * eta;
+		electricalActivePowerW = calcS_VA * powerFactor;
+		shaftOutputPowerW = electricalActivePowerW * eta;
 	}
 
-	const electricalPowerW = calcP_W / eta;
 	const calcQ_var = Math.sqrt(
-		Math.max(0, calcS_VA * calcS_VA - electricalPowerW * electricalPowerW),
+		Math.max(0, calcS_VA * calcS_VA - electricalActivePowerW * electricalActivePowerW),
 	);
 	const phiRad = Math.acos(Math.min(1, Math.max(-1, powerFactor)));
 	const phiDegrees = (phiRad * 180) / Math.PI;
@@ -102,7 +116,8 @@ export function calculateThreePhasePower(
 
 	if (
 		!isFinite(calcI) ||
-		!isFinite(calcP_W) ||
+		!isFinite(electricalActivePowerW) ||
+		!isFinite(shaftOutputPowerW) ||
 		!isFinite(calcS_VA) ||
 		!isFinite(calcQ_var)
 	) {
@@ -113,8 +128,10 @@ export function calculateThreePhasePower(
 		voltageLine: Number(voltage.toFixed(2)),
 		voltagePhase: Number(phaseVoltage.toFixed(2)),
 		current: Number(calcI.toFixed(2)),
-		activePowerW: Number(calcP_W.toFixed(2)),
-		activePowerKW: Number((calcP_W / 1000).toFixed(3)),
+		electricalActivePowerW: Number(electricalActivePowerW.toFixed(2)),
+		electricalActivePowerKW: Number((electricalActivePowerW / 1000).toFixed(3)),
+		shaftOutputPowerW: Number(shaftOutputPowerW.toFixed(2)),
+		shaftOutputPowerKW: Number((shaftOutputPowerW / 1000).toFixed(3)),
 		apparentPowerVA: Number(calcS_VA.toFixed(2)),
 		apparentPowerKVA: Number((calcS_VA / 1000).toFixed(3)),
 		reactivePowerVar: Number(calcQ_var.toFixed(2)),
@@ -131,8 +148,10 @@ function createErrorResult(message: string): ThreePhasePowerResult {
 		voltageLine: 0,
 		voltagePhase: 0,
 		current: 0,
-		activePowerW: 0,
-		activePowerKW: 0,
+		electricalActivePowerW: 0,
+		electricalActivePowerKW: 0,
+		shaftOutputPowerW: 0,
+		shaftOutputPowerKW: 0,
 		apparentPowerVA: 0,
 		apparentPowerKVA: 0,
 		reactivePowerVar: 0,
