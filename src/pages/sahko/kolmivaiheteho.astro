@@ -1,0 +1,79 @@
+---
+import ThreePhasePowerCalculator from "../../components/calculators/ThreePhasePowerCalculator";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+
+const title = "3-vaiheteholaskuri (P, S, Q, I, cos φ) | Insinöörilaskurit.fi";
+const description =
+	"Laske 3-vaihejärjestelmän pätöteho (kW), näennäisteho (kVA), loisteho (kvar) ja virta (A). Tukee moottorimitoituksia ja tehokertoimia.";
+
+const jsonLd = {
+	"@context": "https://schema.org",
+	"@graph": [
+		{
+			"@type": "SoftwareApplication",
+			name: "3-vaiheteholaskuri",
+			operatingSystem: "All",
+			applicationCategory: "UtilitiesApplication",
+			offers: { "@type": "Offer", price: "0", priceCurrency: "EUR" },
+			description: description,
+		},
+		{
+			"@type": "FAQPage",
+			mainEntity: [
+				{
+					"@type": "Question",
+					name: "Miten 3-vaiheteho lasketaan?",
+					acceptedAnswer: {
+						"@type": "Answer",
+						text: "3-vaihesähkön pätöteho lasketaan kaavalla P = √3 × U_L × I × cos(φ) × η, missä U_L on pääjännite (esim. 400 V), I on vaihevirta ampeereina, cos(φ) on tehokerroin ja η on hyötysuhde.",
+					},
+				},
+				{
+					"@type": "Question",
+					name: "Mitä eroa on pätöteholla (P) ja näennäisteholla (S)?",
+					acceptedAnswer: {
+						"@type": "Answer",
+						text: "Pätöteho (P, watti/kilowatti) on hyödyksi muuttuvaa todellista tehoa. Näennäisteho (S, voltit-ampeeri/kVA) on järjestelmän kokonaisteho, joka huomioi myös loistehon (Q, kvar).",
+					},
+				},
+			],
+		},
+	],
+};
+---
+
+<BaseLayout title={title} description={description}>
+	<nav
+		class="flex items-center gap-2 text-xs font-medium text-slate-500 dark:text-slate-400 mb-6"
+	>
+		<a href="/" class="hover:text-blue-600 dark:hover:text-blue-400 transition">Etusivu</a
+		>
+		<span>/</span>
+		<span class="text-slate-700 dark:text-slate-300">Sähkö</span>
+		<span>/</span>
+		<span class="text-blue-600 dark:text-blue-400 font-bold">3-vaiheteho</span>
+	</nav>
+
+	<header class="mb-10 space-y-3">
+		<div
+			class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/10 text-blue-600 dark:text-blue-400 border border-blue-500/20 text-xs font-bold"
+		>
+			⚡ Sähkötekniikka
+		</div>
+		<h1
+			class="text-3xl sm:text-4xl font-extrabold tracking-tight text-slate-900 dark:text-white"
+		>
+			3-vaiheteholaskuri (AC)
+		</h1>
+		<p class="text-slate-600 dark:text-slate-400 text-base sm:text-lg max-w-3xl">
+			Laske kolmivaihesähkön pätöteho (P), näennäisteho (S), loisteho (Q) sekä
+			vaihevirta (I) ja tehokerroin (cos φ).
+		</p>
+	</header>
+
+	<section class="mb-16">
+		<ThreePhasePowerCalculator client:load />
+	</section>
+
+	<script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+</BaseLayout>

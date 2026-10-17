@@ -26,6 +26,7 @@ Follow this strict structure for all new calculators:
 
 - **Codebase:** All variable names, function names, types, interfaces, comments, and unit tests MUST be written in **English**.
 - **User Interface:** All user-facing UI texts, labels, tooltips, validation messages, FAQs, and SEO descriptions MUST be in grammatically correct, technical **Finnish**.
+- **Math in UI text:** In ordinary HTML/Astro and React user-facing text, never use raw LaTeX delimiters (`$...$`, `\(...\)`, `\[...\]`) or LaTeX commands. They are not rendered without a math typesetting library. Write formulas and symbols using plain text and Unicode instead (for example, `mm²`, `φ`, `Uₗ`, and `cos φ`).
 
 ## 5. Mandatory Workflow for Adding a New Calculator
 
