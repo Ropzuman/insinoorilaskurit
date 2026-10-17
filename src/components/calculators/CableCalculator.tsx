@@ -86,7 +86,7 @@ export default function CableCalculator() {
 								key={v}
 								type="button"
 								onClick={() => setVoltage(v)}
-								className={`py-2.5 px-3 rounded-xl text-sm font-bold min-h-[44px] transition focus:outline-none focus:ring-2 focus:ring-blue-500 ${
+								className={`py-2.5 px-3 rounded-xl text-sm font-bold min-h-11 transition focus:outline-none focus:ring-2 focus:ring-blue-500 ${
 									voltage === v
 										? "bg-blue-600 text-white shadow-md"
 										: "bg-slate-100 dark:bg-slate-700/60 text-slate-700 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700"
@@ -139,7 +139,7 @@ export default function CableCalculator() {
 									step="0.5"
 									value={currentInput || ""}
 									onChange={(e) => setCurrentInput(parseFloat(e.target.value) || 0)}
-									className="w-full px-4 py-3 rounded-xl bg-slate-50 dark:bg-slate-900 border border-slate-300 dark:border-slate-700 text-slate-900 dark:text-white text-lg font-mono focus:ring-2 focus:ring-blue-500 focus:outline-none min-h-[44px]"
+									className="w-full px-4 py-3 rounded-xl bg-slate-50 dark:bg-slate-900 border border-slate-300 dark:border-slate-700 text-slate-900 dark:text-white text-lg font-mono focus:ring-2 focus:ring-blue-500 focus:outline-none min-h-11"
 									placeholder="Esim. 16"
 								/>
 								<span className="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 font-bold">
@@ -156,7 +156,7 @@ export default function CableCalculator() {
 									step="50"
 									value={powerInput || ""}
 									onChange={(e) => setPowerInput(parseFloat(e.target.value) || 0)}
-									className="w-full px-4 py-3 rounded-xl bg-slate-50 dark:bg-slate-900 border border-slate-300 dark:border-slate-700 text-slate-900 dark:text-white text-lg font-mono focus:ring-2 focus:ring-blue-500 focus:outline-none min-h-[44px]"
+									className="w-full px-4 py-3 rounded-xl bg-slate-50 dark:bg-slate-900 border border-slate-300 dark:border-slate-700 text-slate-900 dark:text-white text-lg font-mono focus:ring-2 focus:ring-blue-500 focus:outline-none min-h-11"
 									placeholder="Esim. 3600"
 								/>
 								<span className="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 font-bold">
@@ -204,7 +204,7 @@ export default function CableCalculator() {
 							onChange={(e) =>
 								setConductorMaterial(e.target.value as "copper" | "aluminum")
 							}
-							className="w-full px-4 py-3 rounded-xl bg-slate-50 dark:bg-slate-900 border border-slate-300 dark:border-slate-700 text-slate-900 dark:text-white font-medium focus:ring-2 focus:ring-blue-500 focus:outline-none min-h-[44px]"
+							className="w-full px-4 py-3 rounded-xl bg-slate-50 dark:bg-slate-900 border border-slate-300 dark:border-slate-700 text-slate-900 dark:text-white font-medium focus:ring-2 focus:ring-blue-500 focus:outline-none min-h-11"
 						>
 							<option value="copper">Kupari (Cu)</option>
 							<option value="aluminum">Alumiini (Al)</option>
@@ -218,7 +218,7 @@ export default function CableCalculator() {
 						<select
 							value={maxAllowedDropPercent}
 							onChange={(e) => setMaxAllowedDropPercent(parseFloat(e.target.value))}
-							className="w-full px-4 py-3 rounded-xl bg-slate-50 dark:bg-slate-900 border border-slate-300 dark:border-slate-700 text-slate-900 dark:text-white font-medium focus:ring-2 focus:ring-blue-500 focus:outline-none min-h-[44px]"
+							className="w-full px-4 py-3 rounded-xl bg-slate-50 dark:bg-slate-900 border border-slate-300 dark:border-slate-700 text-slate-900 dark:text-white font-medium focus:ring-2 focus:ring-blue-500 focus:outline-none min-h-11"
 						>
 							<option value={1.5}>1.5 % (Vaativat laitteet)</option>
 							<option value={3}>3.0 % (Vakiokoti/Valaistus)</option>

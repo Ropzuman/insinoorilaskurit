@@ -1,0 +1,142 @@
+---
+import OhmsLawCalculator from "../../components/calculators/OhmsLawCalculator";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+
+const title = "Ohmin laki & Teholaskuri (U, I, R, P) | Insinöörilaskurit.fi";
+const description =
+	"Laske jännite (V), virta (A), resistanssi (Ω) ja teho (W) Ohmin lain ja tehon kaavojen avulla. Ilmainen interaktiivinen insinöörilaskuri.";
+
+const jsonLd = {
+	"@context": "https://schema.org",
+	"@graph": [
+		{
+			"@type": "SoftwareApplication",
+			name: "Ohmin laki & Teholaskuri",
+			operatingSystem: "All",
+			applicationCategory: "UtilitiesApplication",
+			offers: { "@type": "Offer", price: "0", priceCurrency: "EUR" },
+			description: description,
+		},
+		{
+			"@type": "FAQPage",
+			mainEntity: [
+				{
+					"@type": "Question",
+					name: "Miten Ohmin laki lasketaan?",
+					acceptedAnswer: {
+						"@type": "Answer",
+						text: "Ohmin lain mukaan jännite U = R × I, missä R on resistanssi ja I virta. Kun tunnet kaksi suuretta, voit ratkaista kolmannen.",
+					},
+				},
+				{
+					"@type": "Question",
+					name: "Miten sähköteho lasketaan?",
+					acceptedAnswer: {
+						"@type": "Answer",
+						text: "Sähköteho lasketaan kaavalla P = U × I. Ohmin lain avulla teho voidaan esittää myös muodossa P = I² × R tai P = U² / R.",
+					},
+				},
+				{
+					"@type": "Question",
+					name: "Mitä arvoja laskuri hyväksyy?",
+					acceptedAnswer: {
+						"@type": "Answer",
+						text: "Valitse täsmälleen kaksi tunnettua suuretta ja anna niille positiiviset arvot: jännite voltteina (V), virta ampeereina (A), resistanssi ohmeina (Ω) tai teho watteina (W).",
+					},
+				},
+			],
+		},
+	],
+};
+---
+
+<BaseLayout title={title} description={description}>
+	<nav
+		class="flex items-center gap-2 text-xs font-medium text-slate-500 dark:text-slate-400 mb-6"
+	>
+		<a href="/" class="hover:text-blue-600 dark:hover:text-blue-400 transition">Etusivu</a
+		>
+		<span>/</span>
+		<span class="text-slate-700 dark:text-slate-300">Sähkö</span>
+		<span>/</span>
+		<span class="text-blue-600 dark:text-blue-400 font-bold">Ohmin laki</span>
+	</nav>
+
+	<header class="mb-10 space-y-3">
+		<div
+			class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/10 text-blue-600 dark:text-blue-400 border border-blue-500/20 text-xs font-bold"
+		>
+			⚡ Sähkötekniikka
+		</div>
+		<h1
+			class="text-3xl sm:text-4xl font-extrabold tracking-tight text-slate-900 dark:text-white"
+		>
+			Ohmin laki & Teholaskuri
+		</h1>
+		<p class="text-slate-600 dark:text-slate-400 text-base sm:text-lg max-w-3xl">
+			Syötä mitkä tahansa kaksi tunnettua suuretta ($U, I, R, P$), niin laskuri ratkaisee
+			kaksi puuttuvaa lennossa.
+		</p>
+	</header>
+
+	<section class="mb-16">
+		<OhmsLawCalculator client:load />
+	</section>
+
+	<section class="mb-16 space-y-4">
+		<h2 class="text-2xl font-bold text-slate-900 dark:text-white">
+			Ohmin laki ja sähkötehon laskeminen
+		</h2>
+		<p class="text-slate-600 dark:text-slate-400 leading-relaxed max-w-3xl">
+			Ohmin laki yhdistää jännitteen, virran ja resistanssin kaavalla U = R × I. Sähköteho
+			lasketaan kaavalla P = U × I. Näiden kaavojen avulla laskuri ratkaisee kaikki neljä
+			suuretta, kun syötät niistä kaksi. Käytä jännitteelle volttia (V), virralle ampeeria
+			(A), resistanssille ohmia (Ω) ja teholle wattia (W).
+		</p>
+	</section>
+
+	<section class="border-t border-slate-200 dark:border-slate-800 pt-12 space-y-8">
+		<h2 class="text-2xl font-bold text-slate-900 dark:text-white">
+			Usein kysyttyä Ohmin laista
+		</h2>
+		<div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-sm">
+			<div
+				class="bg-white dark:bg-slate-800/60 p-6 rounded-2xl border border-slate-200 dark:border-slate-700/60 space-y-2"
+			>
+				<h3 class="font-bold text-base text-slate-900 dark:text-white">
+					Miten Ohmin laki lasketaan?
+				</h3>
+				<p class="text-slate-600 dark:text-slate-400 leading-relaxed">
+					Ohmin lain mukaan jännite saadaan kertomalla resistanssi virralla: U = R × I.
+					Laki voidaan järjestää myös virran (I = U / R) tai resistanssin (R = U / I)
+					ratkaisemiseksi.
+				</p>
+			</div>
+			<div
+				class="bg-white dark:bg-slate-800/60 p-6 rounded-2xl border border-slate-200 dark:border-slate-700/60 space-y-2"
+			>
+				<h3 class="font-bold text-base text-slate-900 dark:text-white">
+					Miten sähköteho lasketaan?
+				</h3>
+				<p class="text-slate-600 dark:text-slate-400 leading-relaxed">
+					Sähköteho on jännitteen ja virran tulo (P = U × I). Ohmin lakia hyödyntämällä
+					tehon voi laskea myös kaavoilla P = I² × R ja P = U² / R.
+				</p>
+			</div>
+			<div
+				class="bg-white dark:bg-slate-800/60 p-6 rounded-2xl border border-slate-200 dark:border-slate-700/60 space-y-2"
+			>
+				<h3 class="font-bold text-base text-slate-900 dark:text-white">
+					Mitä arvoja laskuri hyväksyy?
+				</h3>
+				<p class="text-slate-600 dark:text-slate-400 leading-relaxed">
+					Valitse täsmälleen kaksi tunnettua suuretta ja anna niille positiiviset arvot:
+					jännite voltteina (V), virta ampeereina (A), resistanssi ohmeina (Ω) tai teho
+					watteina (W).
+				</p>
+			</div>
+		</div>
+	</section>
+
+	<script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+</BaseLayout>

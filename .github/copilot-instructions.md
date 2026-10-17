@@ -49,6 +49,7 @@ When prompted to create or update a calculator, ALWAYS execute in this exact seq
 - Use React `useState` and `useMemo` for instant, reactive calculations (no manual "Calculate" button needed unless computationally heavy).
 - Style with Tailwind CSS v4. Ensure dark mode support using standard Tailwind utilities.
 - Mobile-first, responsive design with accessible touch targets (min height 44px).
+- Build for assistive technology: use semantic HTML, associate every form label with its control, expose interactive state and validation errors programmatically, support keyboard navigation with visible focus, and announce dynamic results or errors accessibly. Do not rely on color alone to communicate meaning.
 
 ### Step 4: Astro Page & SEO Metadata (`src/pages/<category>/<name>.astro`)
 

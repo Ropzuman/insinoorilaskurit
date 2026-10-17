@@ -3,6 +3,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 ---
 
 <BaseLayout title="Insinöörilaskurit.fi ⚡ – Tekniset laskurit ammattilaisille">
+	<!-- Hero-osio -->
 	<section class="text-center space-y-4 mb-12">
 		<h1
 			class="text-3xl sm:text-5xl font-extrabold tracking-tight text-slate-900 dark:text-white"
@@ -15,53 +16,138 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 		</p>
 	</section>
 
-	<!-- Laskurikortit -->
-	<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-		<a
-			href="/sahko/kaapelimitoitus"
-			class="group p-6 bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 hover:border-blue-500 dark:hover:border-blue-400 transition shadow-sm hover:shadow-md"
-		>
-			<div class="text-3xl mb-3">⚡</div>
-			<h2
-				class="text-xl font-bold text-slate-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition"
+	<!-- Laskurit kategorioittain -->
+	<div class="space-y-12">
+		<!-- Sähkötekniikka -->
+		<section id="sahko" class="space-y-4 scroll-mt-20">
+			<div
+				class="flex items-center gap-2 border-b border-slate-200 dark:border-slate-800 pb-3"
 			>
-				Kaapelimitoitus
-			</h2>
-			<p class="text-sm text-slate-600 dark:text-slate-400 mt-2">
-				Mitoita kaapelin poikkipinta-ala, jännitteenalenema ja tehohäviö AC- ja
-				DC-järjestelmille.
-			</p>
-		</a>
+				<span class="text-2xl">⚡</span>
+				<h2 class="text-2xl font-bold text-slate-900 dark:text-white">Sähkötekniikka</h2>
+			</div>
 
-		<a
-			href="/mekaniikka/3d-tulostus"
-			class="group p-6 bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 hover:border-emerald-500 dark:hover:border-emerald-400 transition shadow-sm hover:shadow-md"
-		>
-			<div class="text-3xl mb-3">🛠️</div>
-			<h2
-				class="text-xl font-bold text-slate-900 dark:text-white group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition"
-			>
-				3D-tulostuksen kustannus
-			</h2>
-			<p class="text-sm text-slate-600 dark:text-slate-400 mt-2">
-				Laske kappaleen materiaalikustannukset ja tulostuksen sähkönkulutus suoraan
-				g-määrällä ja ajalla.
-			</p>
-		</a>
+			<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+				<!-- Kaapelimitoitus -->
+				<a
+					href="/sahko/kaapelimitoitus"
+					class="group p-6 bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 hover:border-blue-500 dark:hover:border-blue-400 transition shadow-sm hover:shadow-md flex flex-col justify-between"
+				>
+					<div>
+						<div class="text-3xl mb-3">🔌</div>
+						<h3
+							class="text-xl font-bold text-slate-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition"
+						>
+							Kaapelimitoitus
+						</h3>
+						<p class="text-sm text-slate-600 dark:text-slate-400 mt-2">
+							Mitoita kaapelin poikkipinta-ala, jännitteenalenema ja tehohäviö AC- ja
+							DC-järjestelmille.
+						</p>
+					</div>
+					<span
+						class="mt-4 text-xs font-bold text-blue-600 dark:text-blue-400 flex items-center gap-1"
+					>
+						Avaa laskuri &rarr;
+					</span>
+				</a>
 
-		<a
-			href="/lvi/painehavio"
-			class="group p-6 bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 hover:border-purple-500 dark:hover:border-purple-400 transition shadow-sm hover:shadow-md"
-		>
-			<div class="text-3xl mb-3">💧</div>
-			<h2
-				class="text-xl font-bold text-slate-900 dark:text-white group-hover:text-purple-600 dark:group-hover:text-purple-400 transition"
+				<!-- Ohmin laki & Teho -->
+				<a
+					href="/sahko/ohms-law"
+					class="group p-6 bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 hover:border-blue-500 dark:hover:border-blue-400 transition shadow-sm hover:shadow-md flex flex-col justify-between"
+				>
+					<div>
+						<div class="text-3xl mb-3">⚙️</div>
+						<h3
+							class="text-xl font-bold text-slate-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition"
+						>
+							Ohmin laki & Teho
+						</h3>
+						<p class="text-sm text-slate-600 dark:text-slate-400 mt-2">
+							Ratkaise jännite (U), virta (I), resistanssi (R) ja teho (P) kahden tunnetun
+							suureen avulla.
+						</p>
+					</div>
+					<span
+						class="mt-4 text-xs font-bold text-blue-600 dark:text-blue-400 flex items-center gap-1"
+					>
+						Avaa laskuri &rarr;
+					</span>
+				</a>
+			</div>
+		</section>
+
+		<!-- Mekaniikka & Valmistus -->
+		<section id="mekaniikka" class="space-y-4 scroll-mt-20">
+			<div
+				class="flex items-center gap-2 border-b border-slate-200 dark:border-slate-800 pb-3"
 			>
-				Putkiston painehäviö
-			</h2>
-			<p class="text-sm text-slate-600 dark:text-slate-400 mt-2">
-				Määritä nesteen tai kaasun virtausnopeus ja painehäviö eri putkihalkaisijoille.
-			</p>
-		</a>
+				<span class="text-2xl">🛠️</span>
+				<h2 class="text-2xl font-bold text-slate-900 dark:text-white">
+					Mekaniikka & Valmistus
+				</h2>
+			</div>
+
+			<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+				<a
+					href="/mekaniikka/3d-tulostus"
+					class="group p-6 bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 hover:border-emerald-500 dark:hover:border-emerald-400 transition shadow-sm hover:shadow-md flex flex-col justify-between"
+				>
+					<div>
+						<div class="text-3xl mb-3">🪛</div>
+						<h3
+							class="text-xl font-bold text-slate-900 dark:text-white group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition"
+						>
+							3D-tulostuksen kustannus
+						</h3>
+						<p class="text-sm text-slate-600 dark:text-slate-400 mt-2">
+							Laske kappaleen materiaalikustannukset ja tulostuksen sähkönkulutus suoraan
+							g-määrällä ja ajalla.
+						</p>
+					</div>
+					<span
+						class="mt-4 text-xs font-bold text-emerald-600 dark:text-emerald-400 flex items-center gap-1"
+					>
+						Avaa laskuri &rarr;
+					</span>
+				</a>
+			</div>
+		</section>
+
+		<!-- LVI & Prosessi -->
+		<section id="lvi" class="space-y-4 scroll-mt-20">
+			<div
+				class="flex items-center gap-2 border-b border-slate-200 dark:border-slate-800 pb-3"
+			>
+				<span class="text-2xl">💧</span>
+				<h2 class="text-2xl font-bold text-slate-900 dark:text-white">LVI & Prosessi</h2>
+			</div>
+
+			<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+				<a
+					href="/lvi/painehavio"
+					class="group p-6 bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 hover:border-purple-500 dark:hover:border-purple-400 transition shadow-sm hover:shadow-md flex flex-col justify-between"
+				>
+					<div>
+						<div class="text-3xl mb-3">🌊</div>
+						<h3
+							class="text-xl font-bold text-slate-900 dark:text-white group-hover:text-purple-600 dark:group-hover:text-purple-400 transition"
+						>
+							Putkiston painehäviö
+						</h3>
+						<p class="text-sm text-slate-600 dark:text-slate-400 mt-2">
+							Määritä nesteen tai kaasun virtausnopeus ja painehäviö eri
+							putkihalkaisijoille.
+						</p>
+					</div>
+					<span
+						class="mt-4 text-xs font-bold text-purple-600 dark:text-purple-400 flex items-center gap-1"
+					>
+						Avaa laskuri &rarr;
+					</span>
+				</a>
+			</div>
+		</section>
 	</div>
 </BaseLayout>
